@@ -1,0 +1,22 @@
+{
+  "guests": [
+    {
+      "passcode": "GAMAR01",
+      "type": "person",
+      "name": "Mohamad Gamar",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "FAMILY01",
+      "type": "family",
+      "name": "Keluarga Bapak Ahmad",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "GUEST01",
+      "type": "person",
+      "name": "John Doe",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    }
+  ]
+}
