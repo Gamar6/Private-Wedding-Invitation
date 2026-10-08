@@ -1,21 +1,199 @@
 {
   "guests": [
     {
-      "passcode": "GAMAR01",
-      "type": "person",
-      "name": "Mohamad Gamar",
+      "passcode": "SENJA-27",
+      "type": "couple",
+      "name": "Supriyanto & Yeni",
+      "greeting": "For family who has always been part of our story.",
       "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
     },
     {
-      "passcode": "FAMILY01",
+      "passcode": "LANGIT-14",
+      "type": "couple",
+      "name": "Dzulham & Inas",
+      "greeting": "For two wonderful souls we're grateful to have in our story.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "KEMBARA-83",
+      "type": "couple",
+      "name": "Dendy & Eci",
+      "greeting": "For family who has shared a part of our journey.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "MELATI-42",
+      "type": "couple",
+      "name": "Jatun & Nikmah",
+      "greeting": "For family whose presence makes every celebration feel warmer.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "BULAN-68",
+      "type": "couple",
+      "name": "Irlan & Istri",
+      "greeting": "For family who has been part of the memories we carry with us.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "EMBUN-31",
+      "type": "person",
+      "name": "Fikal",
+      "greeting": "For someone whose presence has always been a part of the journey.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "TEDUH-56",
+      "type": "couple",
+      "name": "Teh Pimpim & Suami",
+      "greeting": "For a dear friend whose presence has brought warmth to our story.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "SENYUM-73",
+      "type": "couple",
+      "name": "Uyun & Partner",
+      "greeting": "For a dear friend who has shared so many little moments with us.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "RINDU-25",
+      "type": "couple",
+      "name": "Ismi & Partner",
+      "greeting": "For a dear friend whose presence is always remembered fondly.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "SORE-91",
+      "type": "person",
+      "name": "Faqih",
+      "greeting": "For a dear friend who has been part of our story.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "BUNGA-38",
+      "type": "couple",
+      "name": "Medhina & Partner",
+      "greeting": "For a dear friend who has made our journey a little brighter.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "ARUNA-64",
+      "type": "couple",
+      "name": "Hilwa & Partner",
+      "greeting": "For a dear friend who holds a special place in our memories.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "KISAH-17",
+      "type": "couple",
+      "name": "Lulu & Partner",
+      "greeting": "For a dear friend who has shared a beautiful chapter with us.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "NADA-52",
+      "type": "person",
+      "name": "Kinan",
+      "greeting": "For a dear friend whose presence makes the story a little more complete.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "AWAN-86",
+      "type": "person",
+      "name": "Tika",
+      "greeting": "For a dear friend who has been part of our little story.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "CAHAYA-43",
+      "type": "person",
+      "name": "Alfiyah",
+      "greeting": "For a dear friend whose presence has brought light to our journey.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "HANGAT-29",
+      "type": "person",
+      "name": "Alifah",
+      "greeting": "For a dear friend who has shared moments worth remembering.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "PULANG-75",
+      "type": "person",
+      "name": "Yuli",
+      "greeting": "For a dear friend who has been part of the journey home.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "DAMAI-34",
+      "type": "couple",
+      "name": "Miss Ine & Suami",
+      "greeting": "For a dear friend whose kindness has always found a place in our story.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "MEKAR-61",
+      "type": "couple",
+      "name": "Miss Aya & Suami",
+      "greeting": "For a dear friend who has been part of so many meaningful moments.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "CERITA-48",
+      "type": "person",
+      "name": "Eka",
+      "greeting": "For someone who has shared so many little chapters of our journey.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "SAPA-92",
+      "type": "person",
+      "name": "Imeh",
+      "greeting": "For a dear friend whose presence has always brought a little warmth.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "BAHAGIA-36",
+      "type": "person",
+      "name": "Yula",
+      "greeting": "For a dear friend who has been part of the moments that made us smile.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "RUMAH-81",
       "type": "family",
-      "name": "Keluarga Bapak Ahmad",
+      "name": "Keluarga Cimahi",
+      "greeting": "For family, whose presence makes every celebration feel like home.",
       "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
     },
     {
-      "passcode": "GUEST01",
+      "passcode": "AKAR-57",
+      "type": "family",
+      "name": "Keluarga Pasuruan",
+      "greeting": "For family, whose roots will always be part of our story.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "PELUK-24",
       "type": "person",
-      "name": "John Doe",
+      "name": "Riska",
+      "greeting": "For a dear friend who has shared a special part of our journey.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "SENANDUNG-69",
+      "type": "person",
+      "name": "Gerardien",
+      "greeting": "For a dear friend whose presence became part of the melody of our story.",
+      "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
+    },
+    {
+      "passcode": "JEJAK-45",
+      "type": "person",
+      "name": "Resti",
+      "greeting": "For a friend from a chapter that holds a special place in our memories.",
       "canvasUrl": "https://www.mentalcanvas.net/pkcf3phrbsc"
     }
   ]

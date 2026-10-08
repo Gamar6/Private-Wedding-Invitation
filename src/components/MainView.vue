@@ -20,14 +20,14 @@ onMounted(() => {
     <!-- Menyapa nama tamu secara dinamis -->
     <h1 class="welcome-text">Selamat Datang, {{ namaTamu }}!</h1>
     <p class="sub-text">Silakan geser, perbesar, atau putar gambar di bawah untuk menjelajah.</p>
-    
+
     <!-- Kontainer Mental Canvas Web Player -->
     <div class="canvas-wrapper">
-      <iframe 
-        src="https://www.mentalcanvas.net/pkcf3phrbsc" 
-        title="Undangan Mental Canvas" 
+      <iframe
+        src="https://www.mentalcanvas.net/pkcf3phrbsc"
+        title="Undangan Mental Canvas"
         width="100%" 
-        height="600" 
+        height="600"
         allowfullscreen
         style="border: none; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"
       ></iframe>
