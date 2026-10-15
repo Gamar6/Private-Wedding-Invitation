@@ -40,7 +40,12 @@ export function getSupabaseConfig() {
 
 export async function supabaseRequest<T>(path: string, init: RequestInit = {}): Promise<T> {
   const { url, key } = getSupabaseConfig()
-  const response = await fetch(`${url}/rest/v1/${path}`, {
+  const requestUrl = `${url}/rest/v1/${path}`
+
+  console.log('[supabaseRequest] Target host:', new URL(requestUrl).host)
+  console.log('[supabaseRequest] Target path:', new URL(requestUrl).pathname)
+
+  const response = await fetch(requestUrl, {
     ...init,
     headers: {
       apikey: key,
@@ -51,11 +56,25 @@ export async function supabaseRequest<T>(path: string, init: RequestInit = {}): 
     cache: 'no-store',
   })
 
+  if (response.status === 204) return undefined as T
+
+  const contentType = response.headers.get('content-type') || ''
+  const responseText = await response.text()
+
   if (!response.ok) {
-    // Do not return database errors or secrets to visitors.
     throw new Error(`Database request failed (${response.status}).`)
   }
 
-  if (response.status === 204) return undefined as T
-  return (await response.json()) as T
+  if (!contentType.toLowerCase().includes('application/json')) {
+    console.error('[supabaseRequest] Unexpected content type:', contentType)
+    console.error('[supabaseRequest] Response preview:', responseText.slice(0, 200))
+    throw new Error('Database returned an unexpected response format.')
+  }
+
+  try {
+    return JSON.parse(responseText) as T
+  } catch {
+    console.error('[supabaseRequest] Invalid JSON response.')
+    throw new Error('Database returned invalid JSON.')
+  }
 }

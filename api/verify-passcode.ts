@@ -13,11 +13,12 @@ type GuestRow = {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!requirePost(req, res)) return
 
-  const passcode =
-    typeof req.body?.passcode === 'string' ? req.body.passcode.trim() : ''
+  const passcode = typeof req.body?.passcode === 'string' ? req.body.passcode.trim() : ''
 
   if (!passcode || passcode.length > 80) {
-    return res.status(400).json({ success: false, message: 'Please enter a valid invitation code.' })
+    return res
+      .status(400)
+      .json({ success: false, message: 'Please enter a valid invitation code.' })
   }
 
   try {
@@ -44,7 +45,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           : { enabled: false, label: null },
       },
     })
-  } catch {
-    return res.status(500).json({ success: false, message: 'Unable to verify invitation right now.' })
+  } catch (error) {
+    console.error('[verify-passcode] Error:', error)
+
+    return res.status(500).json({
+      success: false,
+      message: 'Unable to verify invitation right now.',
+    })
   }
 }

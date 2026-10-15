@@ -1,12 +1,18 @@
-
 <script setup lang="ts">
-import { ref, onBeforeUnmount } from 'vue'
+import { ref } from 'vue'
 
 export type Guest = {
+  id?: string
   passcode: string
-  type: 'person' | 'family'
+  type: 'person' | 'couple' | 'family'
   name: string
-  canvasUrl: string
+  greeting?: string
+  videoUrl?: string
+  canvasUrl?: string
+  dressCode?: {
+    enabled: boolean
+    label: string | null
+  }
 }
 
 const emit = defineEmits<{
@@ -30,40 +36,45 @@ async function verifyPasscode() {
   isLoading.value = true
 
   try {
-    const response = await fetch('/guests.json')
+    const response = await fetch('/api/verify-passcode', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        passcode: code,
+      }),
+    })
 
-    if (!response.ok) {
-      throw new Error('Gagal mengambil guests.json')
-    }
+    const result = await response.json()
 
-    const data = await response.json()
-
-    const foundGuest = data.guests.find(
-      (item: Guest) =>
-        item.passcode.toLowerCase() === code.toLowerCase(),
-    )
-
-    if (!foundGuest) {
-      errorMessage.value = 'Invitation code tidak ditemukan.'
+    if (!response.ok || !result.success || !result.guest) {
+      errorMessage.value = result.message || 'Invitation code tidak ditemukan.'
       return
     }
 
-    // Kompatibilitas dengan alur lama
-    localStorage.setItem('namaUndangan', foundGuest.name)
+    const guest: Guest = {
+      ...result.guest,
+      passcode: code,
+      videoUrl: result.guest.dressCode?.enabled
+        ? '/video-dresscode.mp4'
+        : '/video-no-dresscode.mp4',
+      dressCode: {
+        enabled: result.guest.dressCode?.enabled === true,
+        label: result.guest.dressCode?.label ?? null,
+      },
+    }
 
-    emit('verified', foundGuest)
+    localStorage.setItem('namaUndangan', guest.name)
+
+    emit('verified', guest)
   } catch (error) {
-    console.error(error)
-    errorMessage.value =
-      'Terjadi kesalahan saat membaca data invitation.'
+    console.error('Passcode verification failed:', error)
+    errorMessage.value = 'Unable to verify your invitation. Please try again.'
   } finally {
     isLoading.value = false
   }
 }
-
-onBeforeUnmount(() => {
-  // Tidak ada timer yang perlu dibersihkan
-})
 </script>
 
 <template>
@@ -87,13 +98,9 @@ onBeforeUnmount(() => {
         PRIVATE INVITATION
       </p>
 
-      <h1 class="font-serif text-5xl font-normal tracking-tight sm:text-6xl">
-        Welcome
-      </h1>
+      <h1 class="font-serif text-5xl font-normal tracking-tight sm:text-6xl">Welcome</h1>
 
-      <p class="mb-8 mt-4 text-sm text-[#a18a81]">
-        Please enter your invitation code
-      </p>
+      <p class="mb-8 mt-4 text-sm text-[#a18a81]">Please enter your invitation code</p>
 
       <!-- Input -->
       <input

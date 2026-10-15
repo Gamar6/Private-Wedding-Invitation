@@ -1,15 +1,13 @@
-
 <script setup lang="ts">
 import { ref } from 'vue'
 
 import PrivacyNotice from './components/invitation/PrivacyNotice.vue'
-import PasskeyView, {
-  type Guest,
-} from './components/invitation/PasskeyView.vue'
+import PasskeyView, { type Guest } from './components/invitation/PasskeyView.vue'
 import InvitationBook from './components/invitation/InvitationBook.vue'
-import MentalCanvasView from './components/invitation/MentalCanvasView.vue'
+import OpeningVideoView from './components/invitation/OpeningVideoView.vue'
+import LandingView from './components/invitation/LandingView.vue'
 
-type InvitationStage = 'privacy' | 'passkey' | 'book' | 'canvas'
+type InvitationStage = 'privacy' | 'passkey' | 'book' | 'video' | 'landing'
 
 const stage = ref<InvitationStage>('privacy')
 const guest = ref<Guest | null>(null)
@@ -24,7 +22,11 @@ function handleVerified(foundGuest: Guest) {
 }
 
 function openBook() {
-  stage.value = 'canvas'
+  stage.value = 'video'
+}
+
+function finishVideo() {
+  stage.value = 'landing'
 }
 </script>
 
@@ -39,21 +41,10 @@ function openBook() {
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <!-- Privacy -->
-      <PrivacyNotice
-        v-if="stage === 'privacy'"
-        key="privacy"
-        @continue="continueFromPrivacy"
-      />
+      <PrivacyNotice v-if="stage === 'privacy'" key="privacy" @continue="continueFromPrivacy" />
 
-      <!-- Passkey -->
-      <PasskeyView
-        v-else-if="stage === 'passkey'"
-        key="passkey"
-        @verified="handleVerified"
-      />
+      <PasskeyView v-else-if="stage === 'passkey'" key="passkey" @verified="handleVerified" />
 
-      <!-- Book -->
       <InvitationBook
         v-else-if="stage === 'book' && guest"
         key="book"
@@ -61,12 +52,14 @@ function openBook() {
         @opened="openBook"
       />
 
-      <!-- Mental Canvas -->
-      <MentalCanvasView
-        v-else-if="stage === 'canvas' && guest"
-        key="canvas"
+      <OpeningVideoView
+        v-else-if="stage === 'video' && guest"
+        key="video"
         :guest="guest"
+        @finished="finishVideo"
       />
+
+      <LandingView v-else-if="stage === 'landing' && guest" key="landing" :guest="guest" />
     </Transition>
   </div>
 </template>
