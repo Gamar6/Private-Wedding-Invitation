@@ -1,4 +1,4 @@
-# Fachry & Poppy — Vercel + Supabase RSVP starter
+# Fachri & Poppy — Vercel + Supabase RSVP starter
 
 This is a backend foundation, not a complete drop-in replacement for the current Vue invitation.
 

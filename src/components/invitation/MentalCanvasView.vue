@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { ref, onBeforeUnmount } from 'vue'
 import type { Guest } from './PasskeyView.vue'
@@ -65,11 +64,7 @@ onBeforeUnmount(() => {
         class="relative z-10 flex min-h-screen flex-col items-center justify-center px-5 py-10"
         :class="{ 'preview-zooming': isZooming }"
       >
-        <p
-          class="mb-7 text-[10px] font-medium tracking-[0.4em] text-[#b99a91]"
-        >
-          THE WEDDING
-        </p>
+        <p class="mb-7 text-[10px] font-medium tracking-[0.4em] text-[#b99a91]">THE WEDDING</p>
 
         <!-- Custom thumbnail -->
         <button
@@ -79,34 +74,34 @@ onBeforeUnmount(() => {
           @click="openCanvas"
         >
           <!-- Pastel illustration -->
-          <div class="absolute inset-0 bg-gradient-to-b from-[#dcebe8] via-[#f7ddd6] to-[#d8e3d7]" />
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-[#dcebe8] via-[#f7ddd6] to-[#d8e3d7]"
+          />
 
           <div class="absolute left-5 top-6 text-3xl opacity-80">🌸</div>
           <div class="absolute right-5 top-10 text-3xl opacity-80">🌷</div>
 
           <div class="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
-            <p class="text-[9px] font-medium tracking-[0.4em] text-[#85746e]">
-              THE WEDDING
-            </p>
+            <p class="text-[9px] font-medium tracking-[0.4em] text-[#85746e]">THE WEDDING</p>
 
             <h1 class="mt-5 font-serif text-4xl italic leading-tight text-[#72564f]">
-              Fachry
+              Fachri
               <br />
               <span class="text-2xl not-italic">&amp;</span>
               <br />
-              Pappoy
+              Poppy
             </h1>
 
             <div class="my-5 text-xl text-[#c78e88]">♡</div>
 
-            <div class="rounded-full bg-white/50 px-4 py-2 text-[10px] tracking-wide text-[#89716b]">
+            <div
+              class="rounded-full bg-white/50 px-4 py-2 text-[10px] tracking-wide text-[#89716b]"
+            >
               Our beautiful beginning
             </div>
           </div>
 
-          <div class="absolute bottom-4 left-0 right-0 text-center text-2xl">
-            🌿 🌸 🌿
-          </div>
+          <div class="absolute bottom-4 left-0 right-0 text-center text-2xl">🌿 🌸 🌿</div>
 
           <!-- Overlay -->
           <div

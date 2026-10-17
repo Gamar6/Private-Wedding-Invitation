@@ -84,7 +84,7 @@ onBeforeUnmount(() => {
               </div>
 
               <h1 class="cover-title">
-                <span>Fachry &amp; Poppy</span>
+                <span>Fachri &amp; Poppy</span>
               </h1>
 
               <div class="cover-divider">
