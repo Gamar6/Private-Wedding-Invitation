@@ -43,10 +43,12 @@ const weddingDate = new Date('2026-11-14T08:00:00+07:00').getTime()
 const attendance = ref('')
 const message = ref('')
 const submitted = ref(false)
+const activeSection = ref('home')
 
 let carouselTimer: ReturnType<typeof setInterval> | undefined
 let countdownTimer: ReturnType<typeof setInterval> | undefined
 let revealObserver: IntersectionObserver | undefined
+let sectionObserver: IntersectionObserver | undefined
 let touchStartX = 0
 
 function changeStory(direction: number) {
@@ -88,24 +90,41 @@ function setupScrollReveal() {
   sections.forEach((section) => revealObserver?.observe(section))
 }
 
+// Observer untuk mendeteksi section yang sedang aktif di layar buat Navbar
+function setupActiveSectionObserver() {
+  const navSections = document.querySelectorAll<HTMLElement>('section[id], footer[id]')
+  sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          activeSection.value = entry.target.id
+        }
+      })
+    },
+    { threshold: 0.3 },
+  )
+  navSections.forEach((sec) => sectionObserver?.observe(sec))
+}
+
 onMounted(() => {
   carouselTimer = setInterval(() => changeStory(1), 5000)
   countdownTimer = setInterval(() => {
     now.value = Date.now()
   }, 1000)
   setupScrollReveal()
+  setupActiveSectionObserver()
 })
 
 onUnmounted(() => {
   if (carouselTimer) clearInterval(carouselTimer)
   if (countdownTimer) clearInterval(countdownTimer)
   revealObserver?.disconnect()
+  sectionObserver?.disconnect()
 })
 </script>
 
 <template>
   <main class="invitation-page min-h-screen overflow-hidden bg-[#fbf8f2] text-[#57483f]">
-    <!-- HERO SECTION -->
     <!-- HERO SECTION -->
     <section
       id="home"
@@ -144,14 +163,13 @@ onUnmounted(() => {
         <div
           class="hero-root-frame relative px-6 py-14 rounded-[44px] border border-[#c2b29f]/30 bg-white/45 backdrop-blur-[3px] shadow-sm overflow-hidden"
         >
-          <!-- Background Image Samar-samar dalam Frame dengan Gradasi Pudar (Bawah Jelas -> Atas Pudar) -->
+          <!-- Background Image Samar-samar dalam Frame dengan Gradasi Pudar -->
           <div
             class="absolute inset-0 bg-cover opacity-30 bg-center pointer-events-none [mask-image:linear-gradient(to_top,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0)_80%)] [-webkit-mask-image:linear-gradient(to_top,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0)_80%)]"
             style="background-image: url('/images/bg-membumi.png')"
           />
 
           <!-- ORNAMEN BINGKAI AKAR / DEDAUNAN SVG (TOP & BOTTOM) -->
-          <!-- Top Botanical Crest -->
           <svg
             class="botanical-crest botanical-crest--top"
             viewBox="0 0 300 60"
@@ -171,7 +189,6 @@ onUnmounted(() => {
               stroke-width="1.5"
               stroke-linecap="round"
             />
-            <!-- Leaves Left -->
             <ellipse
               cx="45"
               cy="35"
@@ -199,7 +216,6 @@ onUnmounted(() => {
               fill="#687864"
               opacity="0.8"
             />
-            <!-- Leaves Right -->
             <ellipse
               cx="255"
               cy="35"
@@ -227,11 +243,9 @@ onUnmounted(() => {
               fill="#687864"
               opacity="0.8"
             />
-            <!-- Center Flourish -->
             <circle cx="150" cy="25" r="4" fill="#a88272" />
           </svg>
 
-          <!-- Bottom Botanical Crest -->
           <svg
             class="botanical-crest botanical-crest--bottom"
             viewBox="0 0 300 60"
@@ -251,7 +265,6 @@ onUnmounted(() => {
               stroke-width="1.5"
               stroke-linecap="round"
             />
-            <!-- Leaves Left -->
             <ellipse
               cx="45"
               cy="25"
@@ -279,7 +292,6 @@ onUnmounted(() => {
               fill="#687864"
               opacity="0.8"
             />
-            <!-- Leaves Right -->
             <ellipse
               cx="255"
               cy="25"
@@ -307,7 +319,6 @@ onUnmounted(() => {
               fill="#687864"
               opacity="0.8"
             />
-            <!-- Center Flourish -->
             <circle cx="150" cy="35" r="4" fill="#a88272" />
           </svg>
 
@@ -344,7 +355,8 @@ onUnmounted(() => {
       </span>
       <span class="soil-line" aria-hidden="true" />
     </section>
-    <!-- INVITATION LETTER SECTION (SURAT KLASIK SIMPEL) -->
+
+    <!-- INVITATION LETTER SECTION -->
     <section
       id="invitation-letter"
       class="letter-section scroll-reveal relative overflow-hidden px-5 py-20 sm:px-8"
@@ -366,11 +378,9 @@ onUnmounted(() => {
         <p class="eyebrow">A letter for you</p>
         <h2 class="mt-2 font-serif text-3xl italic text-[#6f5545]">Especially for you</h2>
 
-        <!-- LEMBARAN SURAT KLASIK BERBINGKAI -->
         <article
           class="classic-letter-card mt-8 relative rounded-2xl border border-[#d8c5b2] bg-[#fffaf3] p-8 sm:p-10 shadow-sm"
         >
-          <!-- Double border inner line -->
           <div class="classic-letter-inner p-6 rounded-xl border border-[#e5d8cb] relative">
             <img
               src="/images/leaf-sprig.svg"
@@ -378,22 +388,17 @@ onUnmounted(() => {
               aria-hidden="true"
               class="absolute -right-4 -bottom-4 w-20 opacity-15 pointer-events-none rotate-12"
             />
-
             <p class="text-[9px] uppercase tracking-[0.3em] text-[#a38a79]">Personal Invitation</p>
-
             <h3 class="mt-4 break-words font-serif text-3xl italic text-[#674c3d]">
               Dear, {{ props.guest.name }}
             </h3>
-
             <div class="mx-auto my-5 h-px w-12 bg-[#cdb5a0]" />
-
             <p class="text-sm leading-8 text-[#85746a]">
               {{
                 props.guest.greeting ||
                 'It would mean so much to have you with us on our special day.'
               }}
             </p>
-
             <p class="mt-8 font-serif text-base italic text-[#9b7863]">With love,</p>
             <p class="mt-1 font-serif text-xl text-[#674c3d]">Fachri &amp; Poppy</p>
             <p class="mt-4 text-[10px] tracking-[0.2em] text-[#a38a79]">14 · 11 · 2026</p>
@@ -406,12 +411,11 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <!-- STORY SECTION (CAROUSEL ASLI + ASET PINGGIRAN) -->
+    <!-- STORY SECTION -->
     <section
       id="story"
       class="story-section scroll-reveal relative overflow-hidden bg-[#f2ede4] px-5 py-16 sm:px-8"
     >
-      <!-- Aset Akar / Dedaunan Hiasan Pinggir Story Section -->
       <img
         src="/images/botanical-corner.svg"
         alt=""
@@ -444,7 +448,6 @@ onUnmounted(() => {
           Five little chapters, one beautiful journey.
         </p>
 
-        <!-- Carousel persis seperti struktur awal -->
         <div class="relative mt-9" @touchstart="startTouch" @touchend="endTouch">
           <div class="relative mx-auto flex h-[370px] items-center justify-center">
             <div
@@ -475,14 +478,15 @@ onUnmounted(() => {
                   class="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
-              <div v-if="index === activeStory" class="mt-5 text-center">
+
+              <div v-if="index === activeStory" class="mt-5 text-center sm:min-h-[75px]">
                 <h3 class="font-serif text-2xl italic">{{ story.title }}</h3>
                 <p class="mt-2 text-xs leading-6 text-[#928075]">{{ story.subtitle }}</p>
               </div>
             </div>
           </div>
 
-          <div class="mt-3 flex items-center justify-center gap-8">
+          <div class="mt-12 sm:mt-20 flex items-center justify-center gap-8">
             <button
               type="button"
               aria-label="Previous story"
@@ -536,18 +540,18 @@ onUnmounted(() => {
           <article class="couple-card couple-card--poppy">
             <div class="couple-initial">P</div>
             <h3 class="mt-5 font-serif text-3xl italic">Poppy</h3>
-            <p>[nama lengkap Poppy]</p>
+            <p>Septia Catur Amalia</p>
             <p class="mt-3 text-xs leading-6 text-[#837166]">
-              Putri dari Bapak [Nama Ayah] &amp; Ibu [Nama Ibu]
+              Putri ke-4 dari Bapak Hairi Armadi &amp; Ibu Masturi
             </p>
           </article>
           <p class="font-serif text-3xl italic text-[#b18c78]">&amp;</p>
           <article class="couple-card couple-card--fachri">
             <div class="couple-initial">F</div>
             <h3 class="mt-5 font-serif text-3xl italic">Fachri</h3>
-            <p>[nama lengkap Fachri]</p>
+            <p>Fachri Muflihuddin</p>
             <p class="mt-3 text-xs leading-6 text-[#837166]">
-              Putra dari Bapak [Nama Ayah] &amp; Ibu [Nama Ibu]
+              Putra ke-4 dari Bapak H. Encep Kamal Soma &amp; Ibu Hj. Yati Supiyati
             </p>
           </article>
         </div>
@@ -767,16 +771,42 @@ onUnmounted(() => {
       </div>
     </footer>
 
-    <!-- NAVIGATION BAR -->
+    <!-- NAVIGATION BAR (DINAMIS ACTIVE STATE) -->
     <nav
       aria-label="Main navigation"
       class="fixed bottom-3 left-1/2 z-40 flex max-w-[calc(100vw-1.5rem)] -translate-x-1/2 items-center gap-1 rounded-full border border-white/80 bg-[#fbf8f2]/90 p-1.5 shadow-lg shadow-[#5e4d40]/10 backdrop-blur-lg"
     >
-      <a href="#home" class="nav-link">Home</a>
-      <a href="#invitation-letter" class="nav-link hidden sm:block">Letter</a>
-      <a href="#story" class="nav-link">Story</a>
-      <a href="#event" class="nav-link">Event</a>
-      <a href="#rsvp" class="nav-link nav-link--active">RSVP</a>
+      <a href="#home" class="nav-link" :class="{ 'nav-link--active': activeSection === 'home' }"
+        >Home</a
+      >
+      <a
+        href="#invitation-letter"
+        class="nav-link hidden sm:block"
+        :class="{ 'nav-link--active': activeSection === 'invitation-letter' }"
+        >Letter</a
+      >
+      <a href="#story" class="nav-link" :class="{ 'nav-link--active': activeSection === 'story' }"
+        >Story</a
+      >
+      <a href="#event" class="nav-link" :class="{ 'nav-link--active': activeSection === 'event' }"
+        >Event</a
+      >
+      <a href="#rsvp" class="nav-link" :class="{ 'nav-link--active': activeSection === 'rsvp' }"
+        >RSVP</a
+      >
+      <a
+        v-if="props.guest.type !== 'family'"
+        href="#gift"
+        class="nav-link hidden sm:block"
+        :class="{ 'nav-link--active': activeSection === 'gift' }"
+        >Gift</a
+      >
+      <a
+        href="#closing"
+        class="nav-link"
+        :class="{ 'nav-link--active': activeSection === 'closing' }"
+        >Closing</a
+      >
     </nav>
   </main>
 </template>
