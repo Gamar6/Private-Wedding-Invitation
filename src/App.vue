@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 
 import PrivacyNotice from './components/invitation/PrivacyNotice.vue'
 import PasskeyView, { type Guest } from './components/invitation/PasskeyView.vue'
 import InvitationBook from './components/invitation/InvitationBook.vue'
 import OpeningVideoView from './components/invitation/OpeningVideoView.vue'
 import LandingView from './components/invitation/LandingView.vue'
+
+const route = useRoute()
 
 type InvitationStage = 'privacy' | 'passkey' | 'book' | 'video' | 'landing'
 
@@ -32,7 +35,12 @@ function finishVideo() {
 
 <template>
   <div class="min-h-screen w-full overflow-hidden">
+    <!-- 🟢 3. Jika halaman yang dibuka adalah /admin, tampilkan RouterView -->
+    <RouterView v-if="route.path === '/admin'" />
+
+    <!-- 🟢 4. Jika bukan /admin, jalankan flow undangan seperti biasa -->
     <Transition
+      v-else
       mode="out-in"
       enter-active-class="transition duration-500 ease-out"
       enter-from-class="opacity-0"
