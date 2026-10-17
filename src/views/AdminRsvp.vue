@@ -3,8 +3,9 @@ import { ref, computed } from 'vue'
 import { createClient } from '@supabase/supabase-js'
 
 // Inisialisasi Supabase Client secara langsung agar tidak perlu meraba-raba path file
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL || ''
+const supabaseAnonKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || ''
 const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // 1. Interface TypeScript
