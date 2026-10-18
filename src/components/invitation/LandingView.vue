@@ -88,6 +88,7 @@ const stories = [
   },
 ]
 const activeStory = ref(0)
+const currentStory = computed(() => stories[activeStory.value])
 const now = ref(Date.now())
 const weddingDate = new Date('2026-11-14T08:00:00+07:00').getTime()
 const attendance = ref('')
@@ -329,24 +330,30 @@ onUnmounted(() => {
       id="story"
       class="story-section scroll-reveal relative overflow-hidden bg-[#f2ede4] px-5 py-16 sm:px-8"
     >
+      <!-- Floral decorations -->
       <img src="/images/BUNGA.svg" alt="" aria-hidden="true" class="story-sprig story-sprig--tl" />
       <img src="/images/8.svg" alt="" aria-hidden="true" class="story-sprig story-sprig--bl" />
       <img src="/images/BUNGA.svg" alt="" aria-hidden="true" class="story-sprig story-sprig--tr" />
       <img src="/images/8.svg" alt="" aria-hidden="true" class="story-sprig story-sprig--br" />
 
       <div class="relative z-10 mx-auto max-w-xl text-center">
+        <!-- Section heading -->
         <p class="eyebrow">Chapters of us</p>
+
         <h2 class="mt-3 font-serif text-4xl italic">Our Love Story</h2>
-        <p class="mt-3 text-xs leading-6 text-[#928075]">
+
+        <p class="mx-auto mt-3 max-w-sm text-xs leading-6 text-[#928075]">
           Five little chapters, one beautiful journey.
         </p>
 
-        <div class="relative mt-9" @touchstart="startTouch" @touchend="endTouch">
-          <div class="relative mx-auto flex h-[370px] items-center justify-center">
+        <!-- Story carousel -->
+        <div class="relative mt-8" @touchstart="startTouch" @touchend="endTouch">
+          <!-- Image stage: fixed height, independent of text -->
+          <div class="relative mx-auto flex h-[290px] items-center justify-center sm:h-[340px]">
             <div
               v-for="(story, index) in stories"
               :key="story.title"
-              class="story-card absolute w-[67%] max-w-[270px] transition-all duration-500 ease-out"
+              class="story-card absolute w-[62%] max-w-[230px] transition-all duration-500 ease-out sm:w-[67%] sm:max-w-[270px]"
               :class="{
                 'z-20 scale-100 opacity-100': index === activeStory,
                 'z-10 -translate-x-[72%] scale-90 opacity-45':
@@ -371,15 +378,35 @@ onUnmounted(() => {
                   class="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
-
-              <div v-if="index === activeStory" class="mt-5 text-center sm:min-h-[75px]">
-                <h3 class="font-serif text-2xl italic">{{ story.title }}</h3>
-                <p class="mt-2 text-xs leading-6 text-[#928075]" v-html="story.subtitle"></p>
-              </div>
             </div>
           </div>
 
-          <div class="mt-12 sm:mt-20 flex items-center justify-center gap-8">
+          <!-- Story text: separate from the image stage -->
+          <div class="mx-auto mt-5 min-h-[150px] max-w-md px-2 sm:min-h-[135px]" aria-live="polite">
+            <Transition
+              mode="out-in"
+              enter-active-class="transition duration-300 ease-out"
+              enter-from-class="translate-y-2 opacity-0"
+              enter-to-class="translate-y-0 opacity-100"
+              leave-active-class="transition duration-200 ease-in"
+              leave-from-class="translate-y-0 opacity-100"
+              leave-to-class="translate-y-1 opacity-0"
+            >
+              <div v-if="currentStory" :key="activeStory">
+                <h3 class="font-serif text-2xl italic text-[#76594f]">
+                  {{ currentStory.title }}
+                </h3>
+
+                <p
+                  class="mt-3 whitespace-normal break-words text-xs leading-6 text-[#928075] sm:text-sm"
+                  v-html="currentStory.subtitle"
+                ></p>
+              </div>
+            </Transition>
+          </div>
+
+          <!-- Navigation -->
+          <div class="mt-5 flex items-center justify-center gap-8">
             <button
               type="button"
               aria-label="Previous story"
@@ -388,10 +415,12 @@ onUnmounted(() => {
             >
               ←
             </button>
+
             <span class="text-[10px] tracking-[0.25em] text-[#917b6d]">
               {{ String(activeStory + 1).padStart(2, '0') }} /
               {{ String(stories.length).padStart(2, '0') }}
             </span>
+
             <button
               type="button"
               aria-label="Next story"
@@ -402,6 +431,7 @@ onUnmounted(() => {
             </button>
           </div>
 
+          <!-- Pagination dots -->
           <div class="mt-5 flex justify-center gap-2">
             <button
               v-for="(story, index) in stories"
@@ -491,6 +521,11 @@ onUnmounted(() => {
 
     <!-- EVENT SECTION -->
     <section id="event" class="scroll-reveal relative overflow-hidden bg-[#e8ece3] px-6 py-16">
+      <img src="/images/8.svg" alt="" aria-hidden="true" class="event-sprig event-sprig--bl" />
+
+      <img src="/images/BUNGA.svg" alt="" aria-hidden="true" class="event-sprig event-sprig--tr" />
+
+      <img src="/images/8.svg" alt="" aria-hidden="true" class="event-sprig event-sprig--br" />
       <img
         src="/images/8.svg"
         alt=""
@@ -1107,5 +1142,43 @@ onUnmounted(() => {
   bottom: -10px;
   right: -10px;
   transform: rotate(180deg);
+}
+
+/* Botanical ornaments — Event Section */
+.event-sprig {
+  position: absolute;
+  z-index: 0;
+  width: clamp(125px, 27vw, 230px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.event-sprig--tl {
+  top: -12px;
+  left: -28px;
+  opacity: 0.48;
+  transform: rotate(-12deg);
+}
+
+.event-sprig--tr {
+  top: 8%;
+  right: -35px;
+  opacity: 0.38;
+  transform: rotate(95deg) scale(0.9);
+}
+
+.event-sprig--bl {
+  bottom: 5%;
+  left: -30px;
+  opacity: 0.32;
+  transform: rotate(-28deg) scale(0.9);
+}
+
+.event-sprig--br {
+  right: -25px;
+  bottom: -10px;
+  opacity: 0.42;
+  transform: rotate(155deg);
 }
 </style>

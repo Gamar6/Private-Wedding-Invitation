@@ -19,7 +19,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const passcode = typeof req.body?.passcode === 'string' ? req.body.passcode.trim() : ''
 
   // 2. Verifikasi Passcode Admin
-  if (passcode !== 'adminwedding123') {
+  if (passcode !== 'mempelai-tercintah') {
     return res.status(401).json({ success: false, message: 'Passcode admin salah!' })
   }
 
