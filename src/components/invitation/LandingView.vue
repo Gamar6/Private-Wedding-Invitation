@@ -94,6 +94,8 @@ const weddingDate = new Date('2026-11-14T08:00:00+07:00').getTime()
 const attendance = ref('')
 const message = ref('')
 const submitted = ref(false)
+const submitting = ref(false)
+const submitError = ref('')
 const activeSection = ref('home')
 
 let carouselTimer: ReturnType<typeof setInterval> | undefined
@@ -112,8 +114,39 @@ function endTouch(event: TouchEvent) {
   const delta = (event.changedTouches[0]?.clientX ?? 0) - touchStartX
   if (Math.abs(delta) > 45) changeStory(delta < 0 ? 1 : -1)
 }
-function submitPreviewRsvp() {
-  if (attendance.value) submitted.value = true
+
+async function submitPreviewRsvp() {
+  if (submitting.value || !attendance.value) return
+
+  submitting.value = true
+  submitError.value = ''
+
+  try {
+    const response = await fetch('/api/rsvp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        passcode: props.guest.passcode,
+        attendance: attendance.value,
+        message: message.value,
+      }),
+    })
+
+    const result = await response.json()
+
+    if (!response.ok || result.success !== true) {
+      throw new Error(result.message || 'Unable to save your RSVP right now.')
+    }
+
+    submitted.value = true
+  } catch (error) {
+    submitError.value =
+      error instanceof Error ? error.message : 'Unable to save your RSVP right now.'
+  } finally {
+    submitting.value = false
+  }
 }
 
 const countdown = computed(() => {
@@ -650,15 +683,20 @@ onUnmounted(() => {
           </label>
           <button
             type="submit"
-            class="w-full rounded-full bg-[#72594c] px-6 py-4 text-sm tracking-wide text-white hover:bg-[#5f483d]"
+            :disabled="submitting"
+            class="w-full rounded-full bg-[#72594c] px-6 py-4 text-sm tracking-wide text-white hover:bg-[#5f483d] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Submit RSVP
+            {{ submitting ? 'Submitting...' : 'Submit RSVP' }}
           </button>
+
+          <p v-if="submitError" role="alert" class="text-sm text-red-700">
+            {{ submitError }}
+          </p>
         </form>
         <div v-else class="mt-8 rounded-2xl border border-[#e3d7ca] bg-white/70 p-6">
           <p class="font-serif text-2xl italic">Thank you ♡</p>
           <p class="mt-3 text-sm leading-6 text-[#89766b]">
-            This is a design preview. Your response has not been sent or saved yet.
+            Your response has been saved successfully. Thank you for sharing your wishes with us.
           </p>
           <button
             type="button"
