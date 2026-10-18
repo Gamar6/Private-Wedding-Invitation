@@ -209,30 +209,10 @@ onUnmounted(() => {
       <div class="hero-wash pointer-events-none absolute inset-0" />
 
       <!-- Aset Akar/Dedaunan di Sudut Utama Section (Rame & Membumi) -->
-      <img
-        src="/images/botanical-corner.svg"
-        alt=""
-        aria-hidden="true"
-        class="hero-sprig hero-sprig--tl"
-      />
-      <img
-        src="/images/leaf-sprig.svg"
-        alt=""
-        aria-hidden="true"
-        class="hero-sprig hero-sprig--bl"
-      />
-      <img
-        src="/images/botanical-corner.svg"
-        alt=""
-        aria-hidden="true"
-        class="hero-sprig hero-sprig--tr"
-      />
-      <img
-        src="/images/leaf-sprig.svg"
-        alt=""
-        aria-hidden="true"
-        class="hero-sprig hero-sprig--br"
-      />
+      <img src="/images/BUNGA.svg" alt="" aria-hidden="true" class="hero-sprig hero-sprig--tl" />
+      <img src="/images/8.svg" alt="" aria-hidden="true" class="hero-sprig hero-sprig--bl" />
+      <img src="/images/BUNGA.svg" alt="" aria-hidden="true" class="hero-sprig hero-sprig--tr" />
+      <img src="/images/8.svg" alt="" aria-hidden="true" class="hero-sprig hero-sprig--br" />
 
       <div class="relative z-10 mx-auto max-w-sm sm:max-w-md w-full">
         <!-- FRAME AKAR & DEDAUNAN LINGKUP NAMA -->
@@ -299,14 +279,9 @@ onUnmounted(() => {
       id="invitation-letter"
       class="letter-section scroll-reveal relative overflow-hidden px-5 py-20 sm:px-8"
     >
+      <img src="/images/8.svg" alt="" aria-hidden="true" class="letter-sprig letter-sprig--left" />
       <img
-        src="/images/leaf-sprig.svg"
-        alt=""
-        aria-hidden="true"
-        class="letter-sprig letter-sprig--left"
-      />
-      <img
-        src="/images/botanical-corner.svg"
+        src="/images/BUNGA.svg"
         alt=""
         aria-hidden="true"
         class="letter-sprig letter-sprig--right"
@@ -321,7 +296,7 @@ onUnmounted(() => {
         >
           <div class="classic-letter-inner p-6 rounded-xl border border-[#e5d8cb] relative">
             <img
-              src="/images/leaf-sprig.svg"
+              src="/images/8.svg"
               alt=""
               aria-hidden="true"
               class="absolute -right-4 -bottom-4 w-20 opacity-15 pointer-events-none rotate-12"
@@ -354,30 +329,10 @@ onUnmounted(() => {
       id="story"
       class="story-section scroll-reveal relative overflow-hidden bg-[#f2ede4] px-5 py-16 sm:px-8"
     >
-      <img
-        src="/images/botanical-corner.svg"
-        alt=""
-        aria-hidden="true"
-        class="story-sprig story-sprig--tl"
-      />
-      <img
-        src="/images/leaf-sprig.svg"
-        alt=""
-        aria-hidden="true"
-        class="story-sprig story-sprig--bl"
-      />
-      <img
-        src="/images/botanical-corner.svg"
-        alt=""
-        aria-hidden="true"
-        class="story-sprig story-sprig--tr"
-      />
-      <img
-        src="/images/leaf-sprig.svg"
-        alt=""
-        aria-hidden="true"
-        class="story-sprig story-sprig--br"
-      />
+      <img src="/images/BUNGA.svg" alt="" aria-hidden="true" class="story-sprig story-sprig--tl" />
+      <img src="/images/8.svg" alt="" aria-hidden="true" class="story-sprig story-sprig--bl" />
+      <img src="/images/BUNGA.svg" alt="" aria-hidden="true" class="story-sprig story-sprig--tr" />
+      <img src="/images/8.svg" alt="" aria-hidden="true" class="story-sprig story-sprig--br" />
 
       <div class="relative z-10 mx-auto max-w-xl text-center">
         <p class="eyebrow">Chapters of us</p>
@@ -464,33 +419,69 @@ onUnmounted(() => {
     </section>
 
     <!-- COUPLE SECTION -->
+
     <section id="couple" class="scroll-reveal relative overflow-hidden px-6 py-16 text-center">
       <img
-        src="/images/botanical-corner.svg"
+        src="/images/BUNGA.svg"
         alt=""
         aria-hidden="true"
         class="section-sprig section-sprig--right"
       />
-      <div class="relative z-10 max-w-3xl mx-auto">
+
+      <div class="relative z-10 mx-auto max-w-3xl">
         <p class="eyebrow">Two hearts, one promise</p>
+
         <h2 class="mt-4 font-serif text-4xl italic">The Couple</h2>
+
         <div class="mx-auto mt-8 grid gap-8 md:grid-cols-[1fr_auto_1fr] md:items-center">
+          <!-- Poppy -->
           <article class="couple-card couple-card--poppy">
+            <div
+              class="mx-auto h-56 w-44 overflow-hidden rounded-t-full border border-[#d8c1aa] bg-[#f4e8df] p-1.5 shadow-lg shadow-[#76594f]/10 sm:h-64 sm:w-48"
+            >
+              <img
+                src="/images/poppy.jpeg"
+                alt="Poppy, Septia Catur Amalia"
+                class="h-full w-full rounded-t-full object-cover object-center"
+                loading="lazy"
+              />
+            </div>
+
             <h3 class="mt-5 font-serif text-3xl italic">Poppy</h3>
+
             <p>Septia Catur Amalia</p>
+
             <p class="mt-3 text-xs leading-6 text-[#837166]">
               Putri ke-4 dari Bapak Hairi Armadi &amp; Ibu Masturi
             </p>
           </article>
-          <p class="font-serif text-3xl italic text-[#b18c78]">&amp;</p>
+
+          <!-- Decorative separator -->
+          <p class="font-serif text-3xl italic text-[#b18c78]" aria-hidden="true">&amp;</p>
+
+          <!-- Fachri -->
           <article class="couple-card couple-card--fachri">
+            <div
+              class="mx-auto h-56 w-44 overflow-hidden rounded-t-full border border-[#d8c1aa] bg-[#f4e8df] p-1.5 shadow-lg shadow-[#76594f]/10 sm:h-64 sm:w-48"
+            >
+              <img
+                src="/images/fachri.jpg"
+                alt="Fachri Muflihuddin"
+                class="h-full w-full rounded-t-full object-cover object-center"
+                loading="lazy"
+              />
+            </div>
+
             <h3 class="mt-5 font-serif text-3xl italic">Fachri</h3>
+
             <p>Fachri Muflihuddin</p>
+
             <p class="mt-3 text-xs leading-6 text-[#837166]">
               Putra ke-4 dari Bapak H. Encep Kamal Soma &amp; Ibu Hj. Yati Supiyati
             </p>
           </article>
         </div>
+
         <p class="mx-auto mt-9 max-w-sm text-sm italic leading-7 text-[#8d796d]">
           "And among His signs is that He created for you mates from among yourselves, that you may
           find tranquility in them; and He placed between you affection and mercy.”
@@ -501,7 +492,7 @@ onUnmounted(() => {
     <!-- EVENT SECTION -->
     <section id="event" class="scroll-reveal relative overflow-hidden bg-[#e8ece3] px-6 py-16">
       <img
-        src="/images/leaf-sprig.svg"
+        src="/images/8.svg"
         alt=""
         aria-hidden="true"
         class="section-sprig section-sprig--left section-sprig--muted"
@@ -588,7 +579,7 @@ onUnmounted(() => {
     <!-- RSVP SECTION -->
     <section id="rsvp" class="scroll-reveal relative overflow-hidden px-6 py-16">
       <img
-        src="/images/botanical-corner.svg"
+        src="/images/BUNGA.svg"
         alt=""
         aria-hidden="true"
         class="section-sprig section-sprig--right section-sprig--small"
@@ -652,7 +643,7 @@ onUnmounted(() => {
       class="scroll-reveal relative overflow-hidden bg-[#f2ede4] px-6 py-16 text-center"
     >
       <img
-        src="/images/leaf-sprig.svg"
+        src="/images/8.svg"
         alt=""
         aria-hidden="true"
         class="section-sprig section-sprig--left"
@@ -669,13 +660,22 @@ onUnmounted(() => {
           <p class="mt-1 font-serif text-xl">BCA</p>
           <div class="mx-auto my-5 h-px w-12 bg-[#d3bcaa]" />
           <p class="text-xs text-[#948175]">Account Number</p>
-          <p class="mt-2 break-words font-serif text-2xl tracking-wider">norek norek norek</p>
+          <p class="mt-2 break-words font-serif text-2xl tracking-wider">0661367996</p>
           <p class="mt-5 text-xs text-[#948175]">Account Holder</p>
-          <p class="mt-1 font-serif text-lg">nama pemilik rekening</p>
+          <p class="mt-1 font-serif text-lg">Septia Catur Amalia</p>
         </div>
         <div class="gift-card mt-5 bg-white/50">
           <p class="eyebrow">Physical Gift</p>
           <p class="mt-4 font-serif text-lg">Recipient / Address</p>
+          <div class="mx-auto my-5 h-px w-12 bg-[#d3bcaa]" />
+          <p class="mt-1 text-sm leading-6 text-[#89766b]">
+            Kp. Bakom Pesantren, No. 20,
+            <br />
+            RT 001/RW 005,
+            <br />
+            Kelurahan Bojongkerta, Kecamatan Bogor Selatan, Kota Bogor, 16139
+          </p>
+          <br />
           <p class="mt-2 text-xs leading-6 text-[#89766b]">
             Gift recipient and delivery address will be added after confirmation.
           </p>
@@ -688,11 +688,11 @@ onUnmounted(() => {
       id="closing"
       class="closing-section scroll-reveal relative overflow-hidden px-6 py-20 text-center"
     >
-      <img src="/images/botanical-corner.svg" alt="" aria-hidden="true" class="closing-botanical" />
+      <img src="/images/BUNGA.svg" alt="" aria-hidden="true" class="closing-botanical" />
       <div class="closing-wash pointer-events-none absolute inset-0" />
       <div class="relative z-10 mx-auto max-w-md">
         <img
-          src="/images/leaf-sprig.svg"
+          src="/images/8.svg"
           alt=""
           aria-hidden="true"
           class="mx-auto mb-5 h-12 w-20 object-contain opacity-70"
