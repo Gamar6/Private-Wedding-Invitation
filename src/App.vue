@@ -14,6 +14,7 @@ type InvitationStage = 'privacy' | 'passkey' | 'book' | 'video' | 'landing'
 
 const stage = ref<InvitationStage>('privacy')
 const guest = ref<Guest | null>(null)
+const weddingAudio = ref<HTMLAudioElement | null>(null)
 
 function continueFromPrivacy() {
   stage.value = 'passkey'
@@ -25,20 +26,34 @@ function handleVerified(foundGuest: Guest) {
 }
 
 function openBook() {
+  // Mulai lagu saat pengguna membuka buku undangan.
+  // Pemanggilan dilakukan sebelum perpindahan halaman.
+  const audio = weddingAudio.value
+
+  if (audio && audio.paused) {
+    void audio.play().catch((error: unknown) => {
+      console.warn('Lagu belum dapat diputar:', error)
+    })
+  }
+
   stage.value = 'video'
 }
 
 function finishVideo() {
+  // Audio tetap berjalan saat masuk ke landing page.
   stage.value = 'landing'
 }
 </script>
 
 <template>
   <div class="min-h-screen w-full overflow-hidden">
-    <!-- 🟢 3. Jika halaman yang dibuka adalah /admin, tampilkan RouterView -->
+    <!-- Satu pemutar audio untuk seluruh alur undangan -->
+    <audio ref="weddingAudio" src="/audio/NadinAmizah-kekal.mp3" preload="auto" loop />
+
+    <!-- Halaman admin -->
     <RouterView v-if="route.path === '/admin'" />
 
-    <!-- 🟢 4. Jika bukan /admin, jalankan flow undangan seperti biasa -->
+    <!-- Alur undangan -->
     <Transition
       v-else
       mode="out-in"
