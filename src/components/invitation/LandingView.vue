@@ -156,6 +156,55 @@ function setupActiveSectionObserver() {
   navSections.forEach((sec) => sectionObserver?.observe(sec))
 }
 
+function addToCalendar() {
+  const title = 'Akad Nikah - Fachri & Poppy'
+  const startDate = '20261114T010000Z'
+  const endDate = '20261114T030000Z'
+
+  const location =
+    "Masjid Raya Al-Mi'raj, Jl. Raya Pajajaran No. 10, Baranangsiang, Bogor, Jawa Barat, 16143"
+
+  const description = 'We invite you to witness the beginning of our forever.'
+
+  const formatDate = (value: string) => value.replace(/[-:]/g, '')
+
+  const escapeIcs = (value: string) =>
+    value.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;')
+
+  const icsContent = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Fachri and Poppy//Wedding Invitation//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `UID:fachri-poppy-wedding-20261114@invitation`,
+    `DTSTAMP:${formatDate(new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'))}`,
+    `DTSTART:${startDate}`,
+    `DTEND:${endDate}`,
+    `SUMMARY:${escapeIcs(title)}`,
+    `LOCATION:${escapeIcs(location)}`,
+    `DESCRIPTION:${escapeIcs(description)}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n')
+
+  const blob = new Blob([icsContent], {
+    type: 'text/calendar;charset=utf-8',
+  })
+
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+
+  link.href = url
+  link.download = 'Fachri-Poppy-Wedding.ics'
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
 onMounted(() => {
   carouselTimer = setInterval(() => changeStory(1), 5000)
   countdownTimer = setInterval(() => {
@@ -466,7 +515,8 @@ onUnmounted(() => {
           </article>
         </div>
         <p class="mx-auto mt-9 max-w-sm text-sm italic leading-7 text-[#8d796d]">
-          “And above all these put on love, which binds everything together in perfect harmony.”
+          "And among His signs is that He created for you mates from among yourselves, that you may
+          find tranquility in them; and He placed between you affection and mercy.”
         </p>
       </div>
     </section>
@@ -491,6 +541,27 @@ onUnmounted(() => {
           <p class="mt-1 font-serif text-5xl">14</p>
           <p class="mt-1 text-xs uppercase tracking-[0.25em]">November 2026</p>
           <p class="mt-5 text-sm">08.00 WIB – selesai</p>
+          <button
+            type="button"
+            @click="addToCalendar"
+            class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-[#687760] px-6 py-3 text-xs tracking-wide text-white transition hover:bg-[#53614c]"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M16 3v4M8 3v4M3 11h18M12 15v4M10 17h4" />
+            </svg>
+            Add to Calendar
+          </button>
           <div class="mx-auto my-6 h-px w-12 bg-[#aab6a2]" />
           <h3 class="font-serif text-xl">Masjid Raya Al-Mi'raj</h3>
           <p class="mx-auto mt-3 max-w-xs text-xs leading-6 text-[#788071]">
