@@ -9,6 +9,7 @@ export type Guest = {
   greeting?: string
   videoUrl?: string
   canvasUrl?: string
+  hasRsvp?: boolean
   dressCode?: {
     enabled: boolean
     label: string | null
@@ -56,6 +57,7 @@ async function verifyPasscode() {
     const guest: Guest = {
       ...result.guest,
       passcode: code,
+      hasRsvp: result.guest.hasRsvp === true,
       videoUrl: result.guest.dressCode?.enabled
         ? '/video-dresscode.mp4'
         : '/video-no-dresscode.mp4',

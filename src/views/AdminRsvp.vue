@@ -74,7 +74,7 @@ const fetchRsvpData = async () => {
 const totalHadir = computed(() => {
   return rsvpList.value.filter((item) => {
     const att = item.attendance?.toLowerCase() || ''
-    return att.includes('hadir') && !att.includes('tidak')
+    return att.includes('attending') && !att.includes('not_attending')
   }).length
 })
 </script>

@@ -56,14 +56,18 @@ export async function supabaseRequest<T>(path: string, init: RequestInit = {}): 
     cache: 'no-store',
   })
 
-  if (response.status === 204) return undefined as T
-
-  const contentType = response.headers.get('content-type') || ''
   const responseText = await response.text()
 
   if (!response.ok) {
+    console.error('[supabaseRequest] Database error:', response.status, responseText.slice(0, 500))
     throw new Error(`Database request failed (${response.status}).`)
   }
+
+  if (response.status === 204 || !responseText.trim()) {
+    return undefined as T
+  }
+
+  const contentType = response.headers.get('content-type') || ''
 
   if (!contentType.toLowerCase().includes('application/json')) {
     console.error('[supabaseRequest] Unexpected content type:', contentType)

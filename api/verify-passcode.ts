@@ -29,8 +29,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const guest = guests[0]
 
     if (!guest) {
-      return res.status(404).json({ success: false, message: 'Invitation code was not found.' })
+      return res.status(404).json({
+        success: false,
+        message: 'Invitation code was not found.',
+      })
     }
+
+    const existingRsvps = await supabaseRequest<{ attendance: 'attending' | 'not_attending' }[]>(
+      `rsvps?select=attendance&guest_id=eq.${encodeURIComponent(guest.id)}&limit=1`,
+    )
+
+    const hasRsvp = existingRsvps.length > 0
 
     // Never return the passcode or internal database fields.
     return res.status(200).json({
@@ -40,6 +49,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         name: guest.name,
         type: guest.type,
         greeting: guest.greeting,
+        hasRsvp,
         dressCode: guest.dress_code_enabled
           ? { enabled: true, label: guest.dress_code_label || 'Berkain' }
           : { enabled: false, label: null },
