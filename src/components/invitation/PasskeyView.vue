@@ -118,7 +118,7 @@ async function verifyPasscode() {
       <button
         type="button"
         :disabled="isLoading"
-        class="mt-4 w-full rounded-full bg-[#76594f] px-7 py-4 font-serif text-sm text-white shadow-lg shadow-[#76594f]/10 transition duration-300 hover:-translate-y-1 hover:bg-[#634a41] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
+        class="mt-4 w-full rounded-full bg-[#F0C4CB] px-7 py-4 font-serif text-sm text-white shadow-lg shadow-[#76594f]/10 transition duration-300 hover:-translate-y-1 hover:bg-[#634a41] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
         @click="verifyPasscode"
       >
         {{ isLoading ? 'Checking...' : 'Open Invitation' }}

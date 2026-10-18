@@ -1,12 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { createClient } from '@supabase/supabase-js'
-
-// Inisialisasi Supabase Client secara langsung agar tidak perlu meraba-raba path file
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL || ''
-const supabaseAnonKey =
-  import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || ''
-const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // 1. Interface TypeScript
 interface Guest {
@@ -29,41 +22,49 @@ const adminPasscode = ref('')
 const isAuthenticated = ref(false)
 const errorMessage = ref('')
 
-// Proteksi Passcode Admin
-const handleLogin = () => {
-  if (adminPasscode.value === 'adminwedding123') {
-    isAuthenticated.value = true
-    fetchRsvpData()
-  } else {
-    alert('Passcode admin salah!')
+// Login Admin via Serverless API
+const handleLogin = async () => {
+  if (!adminPasscode.value.trim()) {
+    alert('Masukkan passcode admin!')
+    return
   }
+
+  await fetchRsvpData()
 }
 
-// Fetch Data dari Supabase
+// Fetch Data dari API Backend
 const fetchRsvpData = async () => {
   loading.value = true
   errorMessage.value = ''
-  try {
-    const { data, error } = await supabase
-      .from('rsvps')
-      .select(`
-        id,
-        attendance,
-        message,
-        created_at,
-        guests (
-          name,
-          type
-        )
-      `)
-      .order('created_at', { ascending: false })
 
-    if (error) throw error
-    rsvpList.value = (data as unknown as RsvpItem[]) || []
+  try {
+    const response = await fetch('/api/admin-rsvp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        passcode: adminPasscode.value.trim(),
+      }),
+    })
+
+    const result = await response.json()
+
+    if (!response.ok || !result.success) {
+      if (response.status === 401) {
+        isAuthenticated.value = false
+        alert('Passcode admin salah!')
+        return
+      }
+      throw new Error(result.message || 'Gagal mengambil data admin.')
+    }
+
+    isAuthenticated.value = true
+    rsvpList.value = result.rsvps || []
   } catch (err) {
     const errorObj = err as Error
-    console.error('Error fetching RSVPs:', errorObj.message || err)
-    errorMessage.value = 'Gagal memuat data rekap kehadiran.'
+    console.error('Admin RSVP fetch failed:', errorObj)
+    errorMessage.value = errorObj.message || 'Gagal memuat data rekap kehadiran.'
   } finally {
     loading.value = false
   }
@@ -89,7 +90,7 @@ const totalHadir = computed(() => {
       <!-- Form Login Admin -->
       <div v-if="!isAuthenticated" class="max-w-sm mx-auto py-12 space-y-4">
         <div class="text-center mb-6">
-          <p class="text-stone-700 font-medium">Masukkan Passcode Admin</p>
+          <p class="text-stone-700 font-medium">Masukkan Passcode Admin masukan kode rsvp</p>
           <p class="text-xs text-stone-400 mt-1">Untuk melihat data tamu yang sudah konfirmasi.</p>
         </div>
         <input

@@ -6,37 +6,87 @@ const props = defineProps<{ guest: Guest }>()
 
 const stories = [
   {
-    title: 'Makan Bakso',
-    subtitle: 'bhappp',
-    image: '/images/Abis-makan-bakso.jpg',
+    title: 'Foto pertama kita',
+    subtitle: 'Kita dibilang mirip wkwkwk...',
+    image: '/images/Foto-pertama-kita.jpg',
     tone: 'from-[#dce6dc] to-[#f2ded3]',
   },
   {
-    title: 'Awal Pacaran',
-    subtitle: 'A friendship turned into something more.',
-    image: '/images/Fachri-dan-rambut-panjangnya-yang-di-kuncir.jpg',
+    title: 'Kebiasaan awal pacaran',
+    subtitle: 'Masih punya energi bolak-balik Bogor-Bekasi wkwk.. ',
+    image: '/images/Kebiasaan-awal-pacaran-(masih-punya-energi-bolak-balik-Bogor-Bekasi-wkwk).jpg',
     tone: 'from-[#ead8d7] to-[#f6e9db]',
   },
   {
-    title: 'First Date',
-    subtitle: 'Small moments, lasting memories.',
-    image: '/images/Foto-pertama-kita.jpg',
+    title: 'Jaman Covid',
+    subtitle: 'Makan bubur pagi-pagi di Galaxy. <i>cakeppp!!</i>',
+    image: '/images/Jaman-covid-makan-bubur-pagi-pagi-di-Galaxy.jpg',
     tone: 'from-[#e7dfd0] to-[#d4e1d9]',
   },
   {
-    title: 'The Proposal',
-    subtitle: 'One question, a lifetime of answers.',
-    image: '/images/Jaman-covid-makan-bubur-pagi-pagi-di-Galaxy.jpg',
+    title: 'Fachri dan Rambut Panjangnya',
+    subtitle: 'Selalu nyariin kunciran di manapunnnn',
+    image: '/images/Fachri-dan-rambut-panjangnya-yang-di-kuncir.jpg',
     tone: 'from-[#e9d6c9] to-[#e1e5d7]',
   },
   {
-    title: 'Until Forever',
-    subtitle: 'And so our next chapter begins.',
-    image: '/images/Kebiasaan-awal-pacaran-(masih-punya-energi-bolak-balik-Bogor-Bekasi-wkwk).jpg',
+    title: 'Hunting di Taman Literasi',
+    subtitle:
+      'Ini taman literasi belum dibuka untuk umum ... tapi kita udah hunting duluan, wleeee!',
+    image: '/images/Hunting-Taman-Literasi-Blok-M-pas-belum-di-buka-untuk-umum.jpg',
+    type: 'image',
+    tone: 'from-[#d9e3d8] to-[#f0dcd7]',
+  },
+  {
+    title: 'Makan Masakan Fachri untuk Pertama Kalinya',
+    subtitle: 'Perkedel dan maklor .. nyamnyam!!',
+    image: '/images/Makan-masakan-Fachri-untuk-pertama-kalinya.jpg',
+    type: 'image',
+    tone: 'from-[#d9e3d8] to-[#f0dcd7]',
+  },
+  {
+    title: 'Fachri jadi Narsum di KKN Poppy',
+    subtitle: 'Ternyata Fachri disukai sama ibu-ibu di tempat KKN Poppy.',
+    image: '/images/Fachri-jadi-narasumber-di-tempat-KKN-nya-Poppy.jpg',
+    type: 'image',
+    tone: 'from-[#d9e3d8] to-[#f0dcd7]',
+  },
+  {
+    title: 'Poppy Sidang Skripsi',
+    subtitle: 'Nemenin dari semester 2 sampe akhir. <i>terharu ketjil</i>',
+    image: '/images/Poppy-sidang-skripsi.jpg',
+    type: 'image',
+    tone: 'from-[#d9e3d8] to-[#f0dcd7]',
+  },
+  {
+    title: 'Merayakan Fachri Keterima Kerja di Gravel',
+    subtitle: 'Makan all you can eat. <i>yeayyyy!</i>',
+    image: '/images/Merayakan-Fachri-yang-baru-keterima-kerja-di-Gravel.jpg',
+    type: 'image',
+    tone: 'from-[#d9e3d8] to-[#f0dcd7]',
+  },
+  {
+    title: 'Keliling Kampus Poppy',
+    subtitle: 'ditutup dengan makan TEKWANNN!! di Kantin Kampus.',
+    image: '/images/Keliling-kampus-Poppy-untuk-pertama-kalinya.jpg',
+    type: 'image',
+    tone: 'from-[#d9e3d8] to-[#f0dcd7]',
+  },
+  {
+    title: 'Merayakan Ulang Tahun Fachri ke-26',
+    subtitle: 'Makan bersama orang-orang yang ada di kampung pemulung, Gasong.',
+    image: '/images/Merayakan-ulang-tahun-Fachri-ke-26-di-Gasong-Kampung-Pemulung❤️.jpg',
+    type: 'image',
+    tone: 'from-[#d9e3d8] to-[#f0dcd7]',
+  },
+  {
+    title: 'Akhirnya ....',
+    subtitle: 'Di tahun ke-6, Poppy dilamar Fachri~',
+    image: '/images/Poppy-di-lamar-Fachri🥹.jpg',
+    type: 'image',
     tone: 'from-[#d9e3d8] to-[#f0dcd7]',
   },
 ]
-
 const activeStory = ref(0)
 const now = ref(Date.now())
 const weddingDate = new Date('2026-11-14T08:00:00+07:00').getTime()
@@ -161,166 +211,28 @@ onUnmounted(() => {
       <div class="relative z-10 mx-auto max-w-sm sm:max-w-md w-full">
         <!-- FRAME AKAR & DEDAUNAN LINGKUP NAMA -->
         <div
-          class="hero-root-frame relative px-6 py-14 rounded-[44px] border border-[#c2b29f]/30 bg-white/45 backdrop-blur-[3px] shadow-sm overflow-hidden"
+          class="hero-root-frame relative px-6 py-14 rounded-[44px] border border-[#c2b29f]/30 bg-white/45 backdrop-blur-[3px] shadow-sm"
         >
-          <!-- Background Image Samar-samar dalam Frame dengan Gradasi Pudar -->
+          <!-- Background Image dibatasi rounded-[44px] dan overflow-hidden tersendiri agar tidak bocor keluar -->
           <div
-            class="absolute inset-0 bg-cover opacity-30 bg-center pointer-events-none [mask-image:linear-gradient(to_top,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0)_80%)] [-webkit-mask-image:linear-gradient(to_top,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0)_80%)]"
-            style="background-image: url('/images/bg-membumi.png')"
+            class="absolute opacity-30 inset-0 bg-cover bg-center pointer-events-none rounded-[44px] overflow-hidden"
+            style="background-image: url('/images/bg-hero.jpg')"
           />
 
-          <!-- ORNAMEN BINGKAI AKAR / DEDAUNAN SVG (TOP & BOTTOM) -->
-          <svg
-            class="botanical-crest botanical-crest--top"
-            viewBox="0 0 300 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <img
+            src="/images/cincin.png"
+            alt=""
             aria-hidden="true"
-          >
-            <path
-              d="M10 50 Q 75 15, 150 25 T 290 50"
-              stroke="#7a8b75"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <path
-              d="M30 42 Q 90 20, 150 30 T 270 42"
-              stroke="#a2b39c"
-              stroke-width="1.5"
-              stroke-linecap="round"
-            />
-            <ellipse
-              cx="45"
-              cy="35"
-              rx="12"
-              ry="5"
-              transform="rotate(-25 45 35)"
-              fill="#7a8b75"
-              opacity="0.75"
-            />
-            <ellipse
-              cx="75"
-              cy="24"
-              rx="14"
-              ry="6"
-              transform="rotate(-15 75 24)"
-              fill="#8a9b85"
-              opacity="0.85"
-            />
-            <ellipse
-              cx="110"
-              cy="22"
-              rx="15"
-              ry="6.5"
-              transform="rotate(-8 110 22)"
-              fill="#687864"
-              opacity="0.8"
-            />
-            <ellipse
-              cx="255"
-              cy="35"
-              rx="12"
-              ry="5"
-              transform="rotate(25 255 35)"
-              fill="#7a8b75"
-              opacity="0.75"
-            />
-            <ellipse
-              cx="225"
-              cy="24"
-              rx="14"
-              ry="6"
-              transform="rotate(15 225 24)"
-              fill="#8a9b85"
-              opacity="0.85"
-            />
-            <ellipse
-              cx="190"
-              cy="22"
-              rx="15"
-              ry="6.5"
-              transform="rotate(8 190 22)"
-              fill="#687864"
-              opacity="0.8"
-            />
-            <circle cx="150" cy="25" r="4" fill="#a88272" />
-          </svg>
+            class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[25%] z-20 w-60 h-auto"
+          />
 
-          <svg
-            class="botanical-crest botanical-crest--bottom"
-            viewBox="0 0 300 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <!-- 2. BOTTOM FRAME DI BAWAH FRAME (Didorong jauh ke bawah memotong garis terluar) -->
+          <img
+            src="/images/bottom-frame.svg"
+            alt=""
             aria-hidden="true"
-          >
-            <path
-              d="M10 10 Q 75 45, 150 35 T 290 10"
-              stroke="#7a8b75"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <path
-              d="M30 18 Q 90 40, 150 30 T 270 18"
-              stroke="#a2b39c"
-              stroke-width="1.5"
-              stroke-linecap="round"
-            />
-            <ellipse
-              cx="45"
-              cy="25"
-              rx="12"
-              ry="5"
-              transform="rotate(25 45 25)"
-              fill="#7a8b75"
-              opacity="0.75"
-            />
-            <ellipse
-              cx="75"
-              cy="36"
-              rx="14"
-              ry="6"
-              transform="rotate(15 75 36)"
-              fill="#8a9b85"
-              opacity="0.85"
-            />
-            <ellipse
-              cx="110"
-              cy="38"
-              rx="15"
-              ry="6.5"
-              transform="rotate(8 110 38)"
-              fill="#687864"
-              opacity="0.8"
-            />
-            <ellipse
-              cx="255"
-              cy="25"
-              rx="12"
-              ry="5"
-              transform="rotate(-25 255 25)"
-              fill="#7a8b75"
-              opacity="0.75"
-            />
-            <ellipse
-              cx="225"
-              cy="36"
-              rx="14"
-              ry="6"
-              transform="rotate(-15 225 36)"
-              fill="#8a9b85"
-              opacity="0.85"
-            />
-            <ellipse
-              cx="190"
-              cy="38"
-              rx="15"
-              ry="6.5"
-              transform="rotate(-8 190 38)"
-              fill="#687864"
-              opacity="0.8"
-            />
-            <circle cx="150" cy="35" r="4" fill="#a88272" />
-          </svg>
+            class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[47%] z-20 w-60 h-auto"
+          />
 
           <!-- Konten Teks Nama -->
           <div class="relative z-10 my-2">
@@ -481,7 +393,7 @@ onUnmounted(() => {
 
               <div v-if="index === activeStory" class="mt-5 text-center sm:min-h-[75px]">
                 <h3 class="font-serif text-2xl italic">{{ story.title }}</h3>
-                <p class="mt-2 text-xs leading-6 text-[#928075]">{{ story.subtitle }}</p>
+                <p class="mt-2 text-xs leading-6 text-[#928075]" v-html="story.subtitle"></p>
               </div>
             </div>
           </div>
@@ -538,7 +450,6 @@ onUnmounted(() => {
         <h2 class="mt-4 font-serif text-4xl italic">The Couple</h2>
         <div class="mx-auto mt-8 grid gap-8 md:grid-cols-[1fr_auto_1fr] md:items-center">
           <article class="couple-card couple-card--poppy">
-            <div class="couple-initial">P</div>
             <h3 class="mt-5 font-serif text-3xl italic">Poppy</h3>
             <p>Septia Catur Amalia</p>
             <p class="mt-3 text-xs leading-6 text-[#837166]">
@@ -547,7 +458,6 @@ onUnmounted(() => {
           </article>
           <p class="font-serif text-3xl italic text-[#b18c78]">&amp;</p>
           <article class="couple-card couple-card--fachri">
-            <div class="couple-initial">F</div>
             <h3 class="mt-5 font-serif text-3xl italic">Fachri</h3>
             <p>Fachri Muflihuddin</p>
             <p class="mt-3 text-xs leading-6 text-[#837166]">
