@@ -158,53 +158,30 @@ function setupActiveSectionObserver() {
 
 function addToCalendar() {
   const title = 'Akad Nikah - Fachri & Poppy'
-  const startDate = '20261114T010000Z'
-  const endDate = '20261114T030000Z'
+
+  // 14 November 2026, pukul 08.00–10.00 WIB
+  const start = '20261114T010000Z'
+  const end = '20261114T030000Z'
 
   const location =
     "Masjid Raya Al-Mi'raj, Jl. Raya Pajajaran No. 10, Baranangsiang, Bogor, Jawa Barat, 16143"
 
-  const description = 'We invite you to witness the beginning of our forever.'
+  const details = 'With gratitude and joy, we invite you to witness the beginning of our forever.'
 
-  const formatDate = (value: string) => value.replace(/[-:]/g, '')
-
-  const escapeIcs = (value: string) =>
-    value.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;')
-
-  const icsContent = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Fachri and Poppy//Wedding Invitation//EN',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    `UID:fachri-poppy-wedding-20261114@invitation`,
-    `DTSTAMP:${formatDate(new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'))}`,
-    `DTSTART:${startDate}`,
-    `DTEND:${endDate}`,
-    `SUMMARY:${escapeIcs(title)}`,
-    `LOCATION:${escapeIcs(location)}`,
-    `DESCRIPTION:${escapeIcs(description)}`,
-    'END:VEVENT',
-    'END:VCALENDAR',
-  ].join('\r\n')
-
-  const blob = new Blob([icsContent], {
-    type: 'text/calendar;charset=utf-8',
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: `${start}/${end}`,
+    details,
+    location,
   })
 
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-
-  link.href = url
-  link.download = 'Fachri-Poppy-Wedding.ics'
-  document.body.appendChild(link)
-  link.click()
-  link.remove()
-
-  setTimeout(() => URL.revokeObjectURL(url), 1000)
+  window.open(
+    `https://calendar.google.com/calendar/render?${params.toString()}`,
+    '_blank',
+    'noopener,noreferrer',
+  )
 }
-
 onMounted(() => {
   carouselTimer = setInterval(() => changeStory(1), 5000)
   countdownTimer = setInterval(() => {
