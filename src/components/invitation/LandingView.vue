@@ -373,10 +373,13 @@ onUnmounted(() => {
         <!-- Section heading -->
         <p class="eyebrow">Chapters of us</p>
 
-        <h2 class="mt-3 font-serif text-4xl italic">Our Love Story</h2>
+        <h2 class="mt-3 font-serif text-3xl italic">LIVING OUR EUDAIMONIA</h2>
+        <p class="mt-2 text-lg leading-7 text-[#8d796d]">(6 Years of Growing Together)</p>
 
         <p class="mx-auto mt-3 max-w-sm text-xs leading-6 text-[#928075]">
-          Five little chapters, one beautiful journey.
+          "Bagi kami, kebahagiaan bukan sekadar perasaan indah yang sesekali datang, melainkan
+          tentang bagaimana kami belajar, tumbuh, dan menjalani hidup bersama selama 6 tahun ini.
+          Inilah jejak perjalanan nyata kami."
         </p>
 
         <!-- Story carousel -->
@@ -749,9 +752,6 @@ onUnmounted(() => {
             Kelurahan Bojongkerta, Kecamatan Bogor Selatan, Kota Bogor, 16139
           </p>
           <br />
-          <p class="mt-2 text-xs leading-6 text-[#89766b]">
-            Gift recipient and delivery address will be added after confirmation.
-          </p>
         </div>
       </div>
     </section>

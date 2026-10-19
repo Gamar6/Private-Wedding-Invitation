@@ -19,6 +19,7 @@ interface RsvpItem {
 const rsvpList = ref<RsvpItem[]>([])
 const loading = ref(false)
 const adminPasscode = ref('')
+const showPassword = ref(false)
 const isAuthenticated = ref(false)
 const errorMessage = ref('')
 
@@ -93,18 +94,96 @@ const totalHadir = computed(() => {
           <p class="text-stone-700 font-medium">Masukkan Passcode Admin masukan kode rsvp</p>
           <p class="text-xs text-stone-400 mt-1">Untuk melihat data tamu yang sudah konfirmasi.</p>
         </div>
-        <input
-          type="password"
-          v-model="adminPasscode"
-          placeholder="Masukkan passcode..."
-          @keyup.enter="handleLogin"
-          class="w-full px-4 py-2.5 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-stone-600 text-sm"
-        />
+        <div class="relative">
+          <input
+            v-model="adminPasscode"
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="Masukkan passcode..."
+            @keyup.enter="handleLogin"
+            class="w-full px-4 py-2.5 pr-12 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-stone-600 text-sm"
+          />
+
+          <button
+            type="button"
+            @click="showPassword = !showPassword"
+            :aria-label="showPassword ? 'Sembunyikan passcode' : 'Lihat passcode'"
+            :aria-pressed="showPassword"
+            class="absolute inset-y-0 right-0 flex items-center px-4 text-stone-400 hover:text-stone-700 transition"
+          >
+            <!-- Password tersembunyi: mata dicoret -->
+            <svg
+              v-if="!showPassword"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 3l18 18" />
+              <path d="M10.585 10.587a2 2 0 0 0 2.828 2.828" />
+              <path
+                d="M9.88 5.09A10.8 10.8 0 0 1 12 4.875c5.25 0 9.125 4.375 10 7.125a10.8 10.8 0 0 1-4.02 5.35"
+              />
+              <path
+                d="M6.61 6.61A11.8 11.8 0 0 0 2 12c.875 2.75 4.75 7.125 10 7.125a10.8 10.8 0 0 0 4.35-.91"
+              />
+            </svg>
+
+            <!-- Password terlihat: mata terbuka -->
+            <svg
+              v-else
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+        </div>
         <button
           @click="handleLogin"
-          class="w-full bg-stone-800 text-white py-2.5 rounded-xl hover:bg-stone-700 transition font-medium text-sm"
+          :disabled="loading"
+          class="w-full bg-stone-800 text-white py-2.5 rounded-xl hover:bg-stone-700 transition font-medium text-sm disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
-          Masuk ke Dashboard
+          <!-- Loading Spinner -->
+          <svg
+            v-if="loading"
+            class="animate-spin h-4 w-4 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            />
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+            />
+          </svg>
+
+          <span>
+            {{ loading ? 'Memverifikasi...' : 'Masuk ke Dashboard' }}
+          </span>
         </button>
       </div>
 
