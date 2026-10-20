@@ -543,7 +543,7 @@ onUnmounted(() => {
             <p>Fachri Muflihuddin</p>
 
             <p class="mt-3 text-xs leading-6 text-[#837166]">
-              Putra ke-4 dari Bapak H. Encep Kamal Soma &amp; Ibu Hj. Yati Supiyati
+              Putra ke-4 dari Alm. Bapak H. Encep Kamal Soma &amp; Ibu Hj. Yati Supiyati
             </p>
           </article>
         </div>
