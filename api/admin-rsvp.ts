@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { requirePost, supabaseRequest } from './_lib/http'
+import { requirePost, supabaseRequest } from './_lib/http.js'
 
 type RsvpRow = {
   id: string
