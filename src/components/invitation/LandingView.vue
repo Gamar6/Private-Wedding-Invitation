@@ -134,7 +134,12 @@ async function submitPreviewRsvp() {
       }),
     })
 
-    const result = await response.json()
+    let result: { success?: boolean; message?: string }
+    try {
+      result = await response.json()
+    } catch {
+      throw new Error('The server returned an invalid response. Please try again later.')
+    }
 
     if (!response.ok || result.success !== true) {
       throw new Error(result.message || 'Unable to save your RSVP right now.')

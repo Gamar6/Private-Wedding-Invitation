@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { requirePost, supabaseRequest } from './_lib/http'
+import { requirePost, supabaseRequest } from './_lib/http.js'
 
 type GuestRow = { id: string; name: string }
 
@@ -49,7 +49,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       success: true,
       message: 'Your RSVP has been saved. Thank you!',
     })
-  } catch {
+  } catch (error) {
+    console.error('[rsvp] Error:', error)
     return res.status(500).json({ success: false, message: 'Unable to save your RSVP right now.' })
   }
 }
